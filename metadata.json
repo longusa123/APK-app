@@ -1,0 +1,6 @@
+{
+  "name": "Backrooms 3D",
+  "description": "A 3D mobile game based on the Backrooms, fully running in Jetpack Compose.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
