@@ -52,9 +52,10 @@ fun GameScreen() {
     var lookX by remember { mutableStateOf(0f) }
 
     LaunchedEffect(Unit) {
-        var lastTime = System.nanoTime()
+        var lastTime = 0L
         while (isActive) {
             withFrameNanos { time ->
+                if (lastTime == 0L) lastTime = time
                 val dt = (time - lastTime) / 1e9
                 lastTime = time
 

@@ -21,28 +21,33 @@ class Player(
     var planeX by mutableDoubleStateOf(startPlaneX)
     var planeY by mutableDoubleStateOf(startPlaneY)
 
+    private fun isWall(mapX: Int, mapY: Int, worldMap: Array<IntArray>): Boolean {
+        if (mapX < 0 || mapX >= worldMap.size || mapY < 0 || mapY >= worldMap[0].size) return true
+        return worldMap[mapX][mapY] > 0
+    }
+
     fun moveForward(speed: Double, worldMap: Array<IntArray>) {
-        if (worldMap[(x + dirX * speed).toInt()][y.toInt()] == 0) x += dirX * speed
-        if (worldMap[x.toInt()][(y + dirY * speed).toInt()] == 0) y += dirY * speed
+        if (!isWall((x + dirX * speed).toInt(), y.toInt(), worldMap)) x += dirX * speed
+        if (!isWall(x.toInt(), (y + dirY * speed).toInt(), worldMap)) y += dirY * speed
     }
 
     fun moveBackward(speed: Double, worldMap: Array<IntArray>) {
-        if (worldMap[(x - dirX * speed).toInt()][y.toInt()] == 0) x -= dirX * speed
-        if (worldMap[x.toInt()][(y - dirY * speed).toInt()] == 0) y -= dirY * speed
+        if (!isWall((x - dirX * speed).toInt(), y.toInt(), worldMap)) x -= dirX * speed
+        if (!isWall(x.toInt(), (y - dirY * speed).toInt(), worldMap)) y -= dirY * speed
     }
 
     fun strafeRight(speed: Double, worldMap: Array<IntArray>) {
         val strX = -dirY
         val strY = dirX
-        if (worldMap[(x + strX * speed).toInt()][y.toInt()] == 0) x += strX * speed
-        if (worldMap[x.toInt()][(y + strY * speed).toInt()] == 0) y += strY * speed
+        if (!isWall((x + strX * speed).toInt(), y.toInt(), worldMap)) x += strX * speed
+        if (!isWall(x.toInt(), (y + strY * speed).toInt(), worldMap)) y += strY * speed
     }
 
     fun strafeLeft(speed: Double, worldMap: Array<IntArray>) {
         val strX = dirY
         val strY = -dirX
-        if (worldMap[(x + strX * speed).toInt()][y.toInt()] == 0) x += strX * speed
-        if (worldMap[x.toInt()][(y + strY * speed).toInt()] == 0) y += strY * speed
+        if (!isWall((x + strX * speed).toInt(), y.toInt(), worldMap)) x += strX * speed
+        if (!isWall(x.toInt(), (y + strY * speed).toInt(), worldMap)) y += strY * speed
     }
 
     fun rotate(speed: Double) {
