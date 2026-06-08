@@ -16,6 +16,7 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     
     // Hide system bars for immersive fullscreen
+    android.util.Log.d("Backrooms", "App Launched")
     val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
     windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
